@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { Vector2, MathUtils } from 'three';
+import { debounce } from '../utils';
 
 export default class Effect {
   constructor(scene, camera) {
@@ -15,9 +16,7 @@ export default class Effect {
     // Center of the screen in 2D coordinates
     this.center = new Vector2(window.innerWidth / 2, window.innerHeight / 2);
 
-    window.addEventListener('resize', () => {
-      this.center.set(window.innerWidth / 2, window.innerHeight / 2);
-    });
+    window.addEventListener('resize', debounce(() => this.center.set(window.innerWidth / 2, window.innerHeight / 2)));
   }
 
   scrollUpdateCallback() {
