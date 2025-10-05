@@ -9,7 +9,7 @@ export default class PlanesMaterial extends ShaderMaterial {
       fragmentShader: baseFragment,
       uniforms: {
         uTexture: { value: texture },
-        uBlurAmount: { value: 0 },
+        uBlurAmount: { value: 0.0 },
       },
     });
   }
