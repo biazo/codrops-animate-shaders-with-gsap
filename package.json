@@ -1,0 +1,20 @@
+{
+  "name": "codrops-shaders-gsap",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.1.6"
+  },
+  "dependencies": {
+    "glsl-fast-gaussian-blur": "^1.0.2",
+    "gsap": "^3.13.0",
+    "three": "^0.180.0",
+    "vite-plugin-glsl": "^1.5.1"
+  }
+}
