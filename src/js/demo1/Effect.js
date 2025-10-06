@@ -59,7 +59,6 @@ export default class Effect {
     .to(object.material.uniforms.uRippleProgress, { keyframes: { value: [0, 1, 0] } }, 0);
   }
   
-
   onClick(e) {
     // Convert click coordinates to normalized device coordinates (-1 to 1)
     const normCoords = {
@@ -76,7 +75,7 @@ export default class Effect {
     if (intersection) {
       const { material, userData } = intersection.object;
 
-      if (this.activeObject) {
+      if (this.activeObject && intersection.object !== this.activeObject && this.activeObject.userData.isBw) {
         this.resetMaterial(this.activeObject)
 
         // Stops timeline if active
