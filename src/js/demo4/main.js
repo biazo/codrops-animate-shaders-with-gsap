@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { InertiaPlugin } from 'gsap/InertiaPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { debounce } from '../utils';
+import { debounce, preloadImages } from '../utils';
 import Stage from './Stage';
 
 gsap.registerPlugin(Draggable, InertiaPlugin, ScrollTrigger);
@@ -74,6 +74,7 @@ function resize() {
   stage.resize();
 }
 
-imagesLoaded(carouselInnerRef, resize);
+preloadImages().then(() => document.body.classList.remove('loading'));
 
+window.addEventListener('load', resize);
 window.addEventListener('resize', debounce(resize));
