@@ -27,6 +27,23 @@ export default class Effect {
       }
     });
   }
+  resetMaterial(object) {
+    // Reset all shader uniforms to default values
+    gsap.timeline({
+      defaults: { duration: 1, ease: 'power2.out' },
+
+      onUpdate() {
+        object.material.uniforms.uTime.value += 0.1;
+      },
+      onComplete() {
+        object.userData.isBw = false;
+      }
+    })
+    .set(object.material.uniforms.uMouse, { value: { x: 0.5, y: 0.5} }, 0)
+    .set(object.material.uniforms.uDirection, { value: 1.0 }, 0)
+    .fromTo(object.material.uniforms.uGrayscaleProgress, { value: 1 }, { value: 0 }, 0)
+    .to(object.material.uniforms.uRippleProgress, { keyframes: { value: [0, 1, 0] } }, 0);
+  }
 
   async onActiveEnter() {
     // Kill any ongoing grayscale animations
@@ -35,14 +52,14 @@ export default class Effect {
     // Animate to grayscale value 0.35 over 1 second
     await gsap.to(this.active.material.uniforms.uGrayscaleProgress, {
       value: 0.35,
-      duration: 1,
+      duration: 0.5,
     });
 
     // Animate to full grayscale (1.0), then reset and toggle direction
     gsap.to(this.active.material.uniforms.uGrayscaleProgress, {
       value: 1,
-      duration: 0.5,
-      delay: 0.5,
+      duration: 0.8,
+      delay: 0.2,
       ease: 'power3.out',
       onComplete: () => {
         // Toggle black and white state
