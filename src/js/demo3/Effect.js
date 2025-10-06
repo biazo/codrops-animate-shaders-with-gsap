@@ -7,6 +7,7 @@ export default class Effect {
     this.scene = scene;
     this.camera = camera;
     this.active = null; // Currently active (pressed) object
+    this.prevActive = null; // Prev active (pressed) object
 
     // Raycaster to detect pointer intersection with 3D objects
     this.raycaster = new Raycaster();
@@ -27,22 +28,24 @@ export default class Effect {
       }
     });
   }
-  resetMaterial(object) {
-    // Reset all shader uniforms to default values
-    gsap.timeline({
-      defaults: { duration: 1, ease: 'power2.out' },
 
-      onUpdate() {
-        object.material.uniforms.uTime.value += 0.1;
-      },
-      onComplete() {
-        object.userData.isBw = false;
-      }
-    })
-    .set(object.material.uniforms.uMouse, { value: { x: 0.5, y: 0.5} }, 0)
-    .set(object.material.uniforms.uDirection, { value: 1.0 }, 0)
-    .fromTo(object.material.uniforms.uGrayscaleProgress, { value: 1 }, { value: 0 }, 0)
-    .to(object.material.uniforms.uRippleProgress, { keyframes: { value: [0, 1, 0] } }, 0);
+  resetState(obj) {
+    obj.userData.isBw = !obj.userData.isBw;
+    obj.material.uniforms.uDirection.value = obj.userData.isBw ? 1.0 : -1.0;
+    obj.material.uniforms.uGrayscaleProgress.value = 0;
+  } 
+
+  resetMaterial(obj) {
+    gsap.killTweensOf(obj.material.uniforms.uGrayscaleProgress);
+
+    obj.material.uniforms.uDirection.value = 1.0;
+    obj.material.uniforms.uMouse.value = { x: 0.5, y: 0.5};
+
+    const tl = gsap.timeline({
+      onComplete: () => this.resetState(obj)
+    });
+
+    tl.fromTo(obj.material.uniforms.uGrayscaleProgress, { value: 0.0 }, { value: 1.0 }, 0.3);
   }
 
   async onActiveEnter() {
@@ -50,10 +53,12 @@ export default class Effect {
     gsap.killTweensOf(this.active.material.uniforms.uGrayscaleProgress);
 
     // Animate to grayscale value 0.35 over 1 second
-    await gsap.to(this.active.material.uniforms.uGrayscaleProgress, {
+    await gsap.fromTo(this.active.material.uniforms.uGrayscaleProgress, { value: 0.0 }, {
       value: 0.35,
       duration: 0.5,
     });
+
+    if (this.prevActive && this.prevActive !== this.active && this.prevActive.userData.isBw) this.resetMaterial(this.prevActive)
 
     // Animate to full grayscale (1.0), then reset and toggle direction
     gsap.to(this.active.material.uniforms.uGrayscaleProgress, {
@@ -62,14 +67,9 @@ export default class Effect {
       delay: 0.2,
       ease: 'power3.out',
       onComplete: () => {
-        // Toggle black and white state
-        this.active.userData.isBw = !this.active.userData.isBw;
+        this.resetState(this.active);
 
-        // Update direction uniform based on new state
-        this.active.material.uniforms.uDirection.value = this.active.userData.isBw ? 1.0 : -1.0;
-
-        // Reset grayscale progress for next cycle
-        this.active.material.uniforms.uGrayscaleProgress.value = 0;
+        this.prevActive = this.active;
       },
     });
   }
