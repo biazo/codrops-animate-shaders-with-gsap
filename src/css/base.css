@@ -216,6 +216,10 @@ a {
       margin-bottom: 1rem;
       cursor: pointer;
     }
+
+    span {
+      display: block;
+    }
   }
 
   .content__canvas {

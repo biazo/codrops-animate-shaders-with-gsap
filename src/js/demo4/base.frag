@@ -26,9 +26,9 @@ vec4 multiPassKawaseBlur(sampler2D tex, vec2 uv, float blurStrength) {
   vec4 baseTexture = texture2D(tex, uv);
   
   // Perform three Kawase blur passes with different offsets scaled by blurStrength
-  vec4 blur1 = kawaseBlur(tex, uv, 1.0 + blurStrength * 0.5);
+  vec4 blur1 = kawaseBlur(tex, uv, 1.0 + blurStrength * 1.5);
   vec4 blur2 = kawaseBlur(tex, uv, 2.0 + blurStrength);
-  vec4 blur3 = kawaseBlur(tex, uv, 3.0 + blurStrength * 1.5);
+  vec4 blur3 = kawaseBlur(tex, uv, 3.0 + blurStrength * 2.5);
   
   // Calculate interpolation factors to smoothly blend between blur passes based on blurStrength
   float t1 = smoothstep(0.0, 3.0, blurStrength);

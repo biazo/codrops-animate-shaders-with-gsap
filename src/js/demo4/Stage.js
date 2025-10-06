@@ -50,12 +50,9 @@ export default class Stage {
 
     texture.colorSpace = SRGBColorSpace;
     const plane = new Mesh(
-      new PlaneGeometry(1, 1),
+      new PlaneGeometry(1, 1, 50, 50),
       new PlanesMaterial(texture),
     );
-
-    const { width, height } = image.getBoundingClientRect();
-    plane.scale.set(width, height, 1);
 
     return plane;
   }
@@ -87,10 +84,9 @@ export default class Stage {
   render() {
     this.renderer.render(this.scene, this.camera);
 
-    // For each plane and each image update the position of the plane
-    // to match the DOM element position on page
+    // For each plane and each image update the position of the plane to match the DOM element position on page
     this.DOMElements.forEach((image, index) => {
-      this.scene.children[index].position.copy(getWorldPositionFromDOM(image, this.camera, this.renderer));
+      this.scene.children[index].position.copy(getWorldPositionFromDOM(image, this.camera));
     });
   }
 }

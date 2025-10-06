@@ -51,11 +51,11 @@ const scrollTriggerInstance = ScrollTrigger.create({
   onUpdate(e) {
     const x = -maxScroll * e.progress;
 
-      gsap.set(carouselInnerRef, { x });
-      draggable.x = x;
-      draggable.update();
+    gsap.set(carouselInnerRef, { x });
+    draggable.x = x;
+    draggable.update();
 
-      if (stage.effect.callback) stage.effect.callback();
+    if (stage.effect.callback) stage.effect.callback();
     }
 });
 
