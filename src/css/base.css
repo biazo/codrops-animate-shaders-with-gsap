@@ -206,6 +206,10 @@ a {
 
       img { 
         width: 33rem;
+
+        @media (max-width: 767px) {
+          width: 28rem;
+        }
       }
     }
 
@@ -218,6 +222,11 @@ a {
       
       padding-left: 3vw;
       padding-right: 3vw;
+
+      @media (max-width: 767px) {
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+      }
 
       img { 
         width: 100%;
