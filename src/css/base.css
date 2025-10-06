@@ -201,18 +201,31 @@ a {
       justify-content: space-between;
       gap: 3rem;
       
+      padding-left: 45vw;
+      padding-right: 40vw;
+
+      img { 
+        width: 33rem;
+      }
+    }
+
+    .content__carousel-inner-static {
+      width: 100%;
+      
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      
       padding-left: 3vw;
       padding-right: 3vw;
 
-      &.centered {
-        padding-left: 45vw;
-        padding-right: 40vw;
+      img { 
+        width: 100%;
       }
     }
 
     img {
       opacity: 0;
-      width: 25rem;
       margin-bottom: 1rem;
       cursor: pointer;
     }

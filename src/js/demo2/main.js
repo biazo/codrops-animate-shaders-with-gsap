@@ -8,7 +8,7 @@ import Stage from './Stage';
 gsap.registerPlugin(Draggable, InertiaPlugin, ScrollTrigger);
 
 const carouselWrapper = document.querySelector('.content');
-const carouselInnerRef = document.querySelector('.content__carousel-inner');
+const carouselInnerRef = document.querySelector('.content__carousel-inner-static');
 
 const stage = new Stage(carouselWrapper);
 

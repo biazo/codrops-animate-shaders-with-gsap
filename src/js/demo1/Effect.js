@@ -6,6 +6,7 @@ export default class Effect {
   constructor(scene, camera) {
     this.scene = scene;
     this.camera = camera;
+    this.activeObject = null;
 
     // Initialize the Three.js raycaster for detecting object intersections
     this.raycaster = new Raycaster();
@@ -40,6 +41,25 @@ export default class Effect {
     .to(material.uniforms.uRippleProgress, { keyframes: { value: [0, 1, 0] } }, 0);
   }
 
+  resetMaterial(object) {
+    // Reset all shader uniforms to default values
+    gsap.timeline({
+      defaults: { duration: 1, ease: 'power2.out' },
+
+      onUpdate() {
+        object.material.uniforms.uTime.value += 0.1;
+      },
+      onComplete() {
+        object.userData.isBw = false;
+      }
+    })
+    .set(object.material.uniforms.uMouse, { value: { x: 0.5, y: 0.5} }, 0)
+    .set(object.material.uniforms.uDirection, { value: 1.0 }, 0)
+    .fromTo(object.material.uniforms.uGrayscaleProgress, { value: 1 }, { value: 0 }, 0)
+    .to(object.material.uniforms.uRippleProgress, { keyframes: { value: [0, 1, 0] } }, 0);
+  }
+  
+
   onClick(e) {
     // Convert click coordinates to normalized device coordinates (-1 to 1)
     const normCoords = {
@@ -55,6 +75,19 @@ export default class Effect {
 
     if (intersection) {
       const { material, userData } = intersection.object;
+
+      if (this.activeObject) {
+        this.resetMaterial(this.activeObject)
+
+        // Stops timeline if active
+        if (this.activeObject.userData.tl?.isActive()) this.activeObject.userData.tl.kill();
+        
+        // Cleans timeline
+        this.activeObject.userData.tl = null;
+      }
+
+      // Setup active object
+      this.activeObject = intersection.object;
 
       // Only trigger animation if one is not already active
       if (!userData.tl?.isActive()) {
