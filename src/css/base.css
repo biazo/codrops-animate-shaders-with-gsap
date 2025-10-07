@@ -9,10 +9,11 @@
   --color-text: #000;
   --color-bg: #FFF;
   --color-link: #000;
-  --color-gray: #444444;
-  --color-accent: #F54927;
+  --color-gray: #959595;
+  --color-accent: #000000;
   --color-link-hover: var(--color-accent);
   --page-padding: 1.5rem;
+  --page-padding-vertical: 5rem;
 }
 
 html,body {
@@ -118,34 +119,44 @@ a {
   width: 100vw;
   
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   justify-content: space-between;
-  padding: var(--page-padding) calc(var(--page-padding) * 2);
+  padding: var(--page-padding-vertical) calc(var(--page-padding) * 2);
   z-index: 10;
 
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 2rem;
+
+    padding: var(--page-padding) calc(var(--page-padding) * 2);
+
   }
 
   .frame__title {
-    font-size: inherit;
-    margin: 0;
+    font-size: 3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.1rem;
+    margin-bottom: 0.75rem;
+
+    @media (max-width: 767px) {
+      font-size: 2.3rem;
+      line-height: 1.15;
+    }
   }
 
   .frame__center {
     text-align: center;
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.75rem;
-    }
-
     nav {
-      font-size: 1.5rem;
+      font-size: 2rem;
       color: var(--color-gray);
+
+      @media (max-width: 767px) {
+        font-size: 1.5rem;
+      }
 
       a {
         color: var(--color-gray);
@@ -158,12 +169,13 @@ a {
   }
 
   .frame__description {
-    color: var(--color-gray);
-    font-size: 10px;
+    color: var(--color-text);
+    font-size: 1rem;
     margin-top: 1rem;
 
     @media (max-width: 767px) {
       font-size: 12px;
+      margin-top: 20px;
     }
   }
 
@@ -171,11 +183,12 @@ a {
     justify-self: end;
   }
 
-  .frame__tags, .frame__tags, .frame__sponsors {
+  .frame__tags, .frame__sponsors {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 600;
   }
 }
 
@@ -205,7 +218,7 @@ a {
       padding-right: 40vw;
 
       img { 
-        width: 33rem;
+        width: 30rem;
 
         @media (max-width: 767px) {
           width: 28rem;
