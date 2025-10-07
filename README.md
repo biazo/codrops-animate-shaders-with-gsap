@@ -1,6 +1,6 @@
-# Animate shaders uniforms with GSAP
+# Animate shaders with GSAP
 
-*Learn how to create a WebGL scrollable and draggable carousel and animate shader uniforms using GSAP.*
+*Let's dive into how to use the GSAP library to animate shader uniforms and create engaging effects for various interactions.*
 
 ![Image Title](https://generative-placeholders.glitch.me/image?width=800&height=600")
 
