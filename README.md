@@ -1,6 +1,6 @@
-# Animate shaders with GSAP
+# Animating Shaders with GSAP for your immersive Website
 
-*Let's dive into how to use the GSAP library to animate shader uniforms and create engaging effects for various interactions.*
+*A step by step tutorial on how to craft different effects to make your website more immersive, engaging and exciting.*
 
 ![Image Title](https://generative-placeholders.glitch.me/image?width=800&height=600")
 
