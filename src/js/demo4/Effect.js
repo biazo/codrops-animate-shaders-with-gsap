@@ -35,14 +35,14 @@ export default class Effect {
       const maxDistance = window.innerWidth / 2;
 
       // Normalize distance and scale to get blur amount (0.0 to 10.0)
-      const blurAmount = MathUtils.clamp(distance / maxDistance * 20, 0.0, 20.0);
+      const blurAmount = MathUtils.clamp(distance / maxDistance * 5, 0.0, 5.0);
 
       // console.log('Distance:', distance, 'Blur:', blurAmount);
 
       // Animate the uBlurAmount uniform of the tile's material rounded to the nearest even number for a cleaner effect
       gsap.to(tile.material.uniforms.uBlurAmount, {
         value: Math.round(blurAmount / 2) * 2,
-        duration: 0.5,
+        duration: 1.5,
         ease: 'power3.out'
       });
     });
