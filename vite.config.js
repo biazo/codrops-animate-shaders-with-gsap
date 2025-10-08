@@ -7,10 +7,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
+  base: './', // 👈 this makes assets relative
   plugins: [glsl()],
   resolve: {
     alias: {
-      // Use a relative alias instead of an absolute one
       '@': resolve(__dirname, 'src'),
     },
   },
