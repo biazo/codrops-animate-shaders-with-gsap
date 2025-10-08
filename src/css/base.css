@@ -127,6 +127,7 @@ a {
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
+    position: relative;
     gap: 2rem;
   }
 
@@ -194,7 +195,7 @@ a {
 .content {
   width: 100vw;
   height: 100svh;
-
+  position: relative;
   display: flex;
   align-items: center;
   overflow: hidden;
