@@ -7,16 +7,17 @@
 :root {
   font-size: 12px;
   --color-text: #000;
-  --color-bg: #FFF;
+  --color-bg: #fff;
   --color-link: #000;
   --color-gray: #959595;
   --color-accent: #000000;
   --color-link-hover: var(--color-accent);
-  --page-padding: 1.5rem;
-  --page-padding-vertical: 5rem;
+  --page-padding: 3vw;
+  --page-padding-vertical: 5vh;
 }
 
-html,body {
+html,
+body {
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -32,7 +33,6 @@ body {
 
 @media (scripting: enabled) {
   .loading {
-
     &::before,
     &::after {
       content: '';
@@ -117,31 +117,27 @@ a {
   top: 0;
   left: 0;
   width: 100vw;
-  
+
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   justify-content: space-between;
-  padding: var(--page-padding-vertical) calc(var(--page-padding) * 2);
+  padding: var(--page-padding-vertical) var(--page-padding);
   z-index: 10;
 
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-
-    padding: var(--page-padding) calc(var(--page-padding) * 2);
-
   }
 
   .frame__title {
-    font-size: 3rem;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: -0.1rem;
     margin-bottom: 0.75rem;
 
     @media (max-width: 767px) {
-      font-size: 2.3rem;
       line-height: 1.15;
     }
   }
@@ -150,17 +146,13 @@ a {
     text-align: center;
 
     nav {
-      font-size: 2rem;
+      font-size: clamp(1.25rem, 1.75vw, 2rem);
       color: var(--color-gray);
-
-      @media (max-width: 767px) {
-        font-size: 1.5rem;
-      }
 
       a {
         color: var(--color-gray);
       }
-      
+
       .active {
         color: var(--color-accent);
       }
@@ -182,7 +174,8 @@ a {
     justify-self: end;
   }
 
-  .frame__tags, .frame__sponsors {
+  .frame__tags,
+  .frame__sponsors {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -193,6 +186,7 @@ a {
 
     @media (max-width: 767px) {
       padding-top: 0;
+      justify-content: center;
     }
   }
 }
@@ -209,20 +203,19 @@ a {
     position: absolute;
     bottom: 8rem;
     width: 100vw;
-    
-    
+
     .content__carousel-inner {
       width: fit-content;
-      
+
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 3rem;
-      
+
       padding-left: 45vw;
       padding-right: 40vw;
 
-      img { 
+      img {
         width: 30rem;
 
         @media (max-width: 767px) {
@@ -233,11 +226,11 @@ a {
 
     .content__carousel-inner-static {
       width: 100%;
-      
+
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 3rem;
-      
+
       padding-left: 3vw;
       padding-right: 3vw;
 
@@ -246,7 +239,7 @@ a {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      img { 
+      img {
         width: 100%;
       }
     }
@@ -285,7 +278,7 @@ a {
   align-items: center;
   gap: 5px;
 
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border-radius: 8px;
   padding: 4px;
 
@@ -294,7 +287,7 @@ a {
   .floating-bar__link {
     padding: 7px 14px;
     border-radius: 8px;
-    
+
     text-align: center;
     font-size: 16px;
     white-space: nowrap;
@@ -302,6 +295,6 @@ a {
 
   .floating-bar__link-back {
     background-color: #000000;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }
