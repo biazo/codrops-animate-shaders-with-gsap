@@ -63,9 +63,9 @@ export default class Effect {
     // Animate to full grayscale (1.0), then reset and toggle direction
     gsap.to(this.active.material.uniforms.uGrayscaleProgress, {
       value: 1,
-      duration: 0.8,
-      delay: 0.2,
-      ease: 'power3.out',
+      duration: 0.5,
+      delay: 0.12,
+      ease: 'power2.in',
       onComplete: () => {
         this.resetState(this.active);
 
